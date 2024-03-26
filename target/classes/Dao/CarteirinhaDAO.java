@@ -7,11 +7,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import model.bo.Carteirinha;
 import model.bo.Cliente;
 
 
 public class CarteirinhaDAO implements InterfaceDAO<Carteirinha> {
+    
+    
+            /*********   inicio   **********/
+    private static CarteirinhaDAO instance;
+    protected EntityManager entityManager;
+    
+    public static CarteirinhaDAO getInstance(){
+        if (instance == null) {
+            instance = new CarteirinhaDAO();
+        }
+        
+        return instance;
+    }
+
+    public CarteirinhaDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
+    
+    
+    /*********   fim   **********/
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public void create(Carteirinha objeto) {

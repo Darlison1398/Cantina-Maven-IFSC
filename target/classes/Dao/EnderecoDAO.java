@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Endereco;
@@ -16,6 +19,48 @@ import model.bo.Endereco;
 
 
 public class EnderecoDAO implements InterfaceDAO<Endereco> {
+    
+    
+              /*********   inicio   **********/
+    private static EnderecoDAO instance;
+    protected EntityManager entityManager;
+    
+    public static EnderecoDAO getInstance(){
+        if (instance == null) {
+            instance = new EnderecoDAO();
+        }
+        
+        return instance;
+    }
+
+    public EnderecoDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
+    
+    
+    /*********   fim   **********/
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public void create(Endereco objeto) {

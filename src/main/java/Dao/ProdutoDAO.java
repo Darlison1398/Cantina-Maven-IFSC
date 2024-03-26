@@ -7,12 +7,50 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import model.bo.Produto;
 
 
 
 public class ProdutoDAO implements InterfaceDAO<Produto>{
 
+          /*********   inicio   **********/
+    private static ProdutoDAO instance;
+    protected EntityManager entityManager;
+    
+    public static ProdutoDAO getInstance(){
+        if (instance == null) {
+            instance = new ProdutoDAO();
+        }
+        
+        return instance;
+    }
+
+    public ProdutoDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
+    
+    
+    /*********   fim   **********/
+    
+    
+    
+    
+    
+    
+    
     @Override
     public void create(Produto objeto) {
         

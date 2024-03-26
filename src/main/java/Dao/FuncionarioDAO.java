@@ -7,12 +7,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Endereco;
 import model.bo.Funcionario;
 
 public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
+    
+    
+                
+      /*********   inicio   **********/
+    private static FuncionarioDAO instance;
+    protected EntityManager entityManager;
+    
+    public static FuncionarioDAO getInstance(){
+        if (instance == null) {
+            instance = new FuncionarioDAO();
+        }
+        
+        return instance;
+    }
+
+    public FuncionarioDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
+    
+    
+    /*********   fim   **********/
+    
+    
+    
+    
+    
 
     @Override
     public void create(Funcionario objeto) {

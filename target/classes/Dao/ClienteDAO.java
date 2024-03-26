@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Cliente;
@@ -14,6 +17,42 @@ import model.bo.Endereco;
 
 
 public class ClienteDAO implements InterfaceDAO<Cliente> {
+    
+    
+        
+      /*********   inicio   **********/
+    private static ClienteDAO instance;
+    protected EntityManager entityManager;
+    
+    public static ClienteDAO getInstance(){
+        if (instance == null) {
+            instance = new ClienteDAO();
+        }
+        
+        return instance;
+    }
+
+    public ClienteDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
+    
+    
+    /*********   fim   **********/
+    
+    
+    
+    
+    
 
     @Override
     public void create(Cliente objeto) {

@@ -11,80 +11,78 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 
 public class BairroDAO implements InterfaceDAO<Bairro> {
     
+    
+    
+    
+    // copiar nos demais DAOS
+    
+    /*********   inicio   **********/
+    private static BairroDAO instance;
+    protected EntityManager entityManager;
+    
+    public static BairroDAO getInstance(){
+        if (instance == null) {
+            instance = new BairroDAO();
+        }
+        
+        return instance;
+    }
+
+    public BairroDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
+    
+    
+    /*********   fim   **********/
+    
+    
+    
+    
 
     @Override
     public void create(Bairro objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "INSERT INTO bairro (descricao) values(?)";
-        PreparedStatement pstm = null;
-        
-       // pstm = conexao.prepareStatement(sqlExecutar);
-        
         
         try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
             
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.execute();
-            
-            
-        } catch (SQLException ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally{
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                    
-                } if (conexao != null) {
-                    conexao.close();
-                    
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();     
-            }    
             
-        } 
-        
+            // vai voltar ao estado anterior caso de errado a gravação de dados no banco
+            entityManager.getTransaction().rollback();
+        }
         
     }
 
     @Override
     public List<Bairro> retrieve() {
         
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "SELECT bairro.id, bairro.descricao FROM mydb.bairro";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
+        List<Bairro> listaBairros;
+  
+        listaBairros = entityManager.createQuery("SELECT b FROM bairro b", Bairro.class).getResultList();        
         
-        // a lista tem que ser criada fora do while
-        List<Bairro> listaBairro = new ArrayList<>();
+        return listaBairros;
         
-        try{
-             pstm = conexao.prepareStatement(sqlExecutar);
-             rst = pstm.executeQuery();
-             
-             
-             while(rst.next()) {
-                 Bairro bairro = new Bairro();
-                 bairro.setId(rst.getInt("id"));
-                 bairro.setDescricao(rst.getString("descricao"));
-                 listaBairro.add(bairro);
-                 
-             }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            
-        }  finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaBairro;
-        }
         
         
     }
@@ -92,74 +90,21 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     @Override
     public Bairro retrieve(int parPK) {
         
-         
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "SELECT bairro.id, bairro.descricao FROM mydb.bairro WHERE bairro.id = ?"; 
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        
-        Bairro bairro = new Bairro();
-        
-        
-        try{
-             pstm = conexao.prepareStatement(sqlExecutar);
-             pstm.setInt(1, parPK);
-             rst = pstm.executeQuery();
-             
-             
-             while(rst.next()) {   
-                 bairro.setId(rst.getInt("id"));
-                 bairro.setDescricao(rst.getString("descricao"));
-             }
-            
-             
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            
-        }  finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return bairro;
-        }
+        return  entityManager.find(Bairro.class, parPK);
         
     }
 
+    
+    
     @Override
     public List<Bairro> retrieve(String parString) {
         
-        Connection conexao = ConnectionFactory.getConnection();
+        List<Bairro> listaBairros;
+        listaBairros = entityManager.createQuery("SELECT b FROM bairro b WHERE b.descricao LIKE :parDescricao", Bairro.class)
+                .setParameter("parDescricao", "%" + parString +  "%" ).getResultList();
         
-        /*   OLHAR AQUI COMO EXEMPLO */
-        //String sqlExecutar = "SELECT bairro.id, bairro.descricao FROM bairro WHERE descricao like ? AND id = ?";
-        String sqlExecutar = "SELECT bairro.id, bairro.descricao FROM bairro WHERE descricao like ?";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;  
-        List<Bairro> listaBairro = new ArrayList<>();
+        return listaBairros;
         
-        
-         try{
-             pstm = conexao.prepareStatement(sqlExecutar);
-             pstm.setString(1, "%" + parString + "%");
-             //pstm.setInt(2, parId);
-             rst = pstm.executeQuery();
-             
-             
-             while(rst.next()) {   
-                 Bairro bairro = new Bairro();
-                 bairro.setId(rst.getInt("id"));
-                 bairro.setDescricao(rst.getString("descricao"));
-                 listaBairro.add(bairro);
-             }
-            
-             
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            
-        }  finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaBairro;
-        }
         
     }
     
@@ -168,26 +113,21 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     @Override
     public void update(Bairro objeto) {
         
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "UPDATE bairro SET bairro.descricao = ? WHERE bairro.id = ?";
-
-        PreparedStatement pstm = null;
+        // merge faz update no banco
         
         try {
             
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setInt(2, objeto.getId());
-            pstm.execute();
+            Bairro bairro = entityManager.find(Bairro.class, objeto);
+            entityManager.getTransaction().begin();
+            entityManager.merge(bairro);
+            entityManager.getTransaction().commit();
             
-            
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
+            entityManager.getTransaction().rollback();
             
-        } finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm);
         }
+        
     }
 
     @Override

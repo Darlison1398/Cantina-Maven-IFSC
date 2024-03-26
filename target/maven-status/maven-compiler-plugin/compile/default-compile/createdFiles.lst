@@ -7,6 +7,7 @@ model\bo\Cliente.class
 view\BuscaVenda$2.class
 view\BuscaCarteirinha.class
 view\CadastroCarteirinha$2.class
+model\bo\Contas_.class
 view\CadastroFuncionario$8.class
 view\Faturamento$5$1.class
 view\Faturamento$4.class
@@ -18,6 +19,7 @@ view\CadastroEndereco$9.class
 view\ModalConnfirm$2.class
 view\MenuPrincipal$2.class
 view\BuscaCarteirinha$1.class
+model\bo\Produto_.class
 view\AbrirCaixa$2.class
 view\CadastroFuncionario$3.class
 view\CadastroFornecedor$8.class
@@ -38,6 +40,7 @@ view\BuscaBairro$5.class
 view\BuscaBairro$6$1.class
 view\TemplateCadastro$5.class
 Dao\CidadeDAO.class
+model\bo\MovimentoCaixa_.class
 view\BuscaCidade$3.class
 view\BuscaFornecedor.class
 controller\ControllerCadastroProduto.class
@@ -56,9 +59,12 @@ view\CadastroFornecedor$6.class
 view\CadastroCliente$7.class
 view\CadastroVenda$5.class
 controller\ControllerCadastroVenda.class
+model\bo\Bairro_.class
+model\bo\Pessoa_.class
 view\BuscaFornecedor$1.class
 view\BuscaFuncionario$2.class
 view\TemplateBusca.class
+HibernateUtil.class
 view\CadastroCarteirinha$4.class
 view\ModalConnfirm$3$1.class
 view\MenuPrincipal$11.class
@@ -99,6 +105,7 @@ view\CadastroBairro.class
 model\bo\Cidade.class
 view\MenuPrincipal$13.class
 com\drsilvacompany\gerenciadorcantinaifsc\GerenciadorCantinaIFSC.class
+model\bo\ItemVenda_.class
 controllerMovimento\FaturamentoController.class
 Dao\BairroDAO.class
 view\BuscaCliente$4.class
@@ -132,7 +139,9 @@ view\CadastroProduto$3.class
 modal\FuncionarioModal.class
 view\CadastroEndereco$5.class
 Dao\ProdutoDAO.class
+model\bo\Fornecedor_.class
 view\MenuPrincipal$5.class
+model\bo\Compra_.class
 view\BuscaCliente$1.class
 view\MenuPrincipal$6.class
 view\CadastroFuncionario$14.class
@@ -147,6 +156,8 @@ view\CadastroCliente$13.class
 view\CadastroProduto$5.class
 controller\ModalConfimController.class
 view\BuscaFuncionario$1.class
+model\bo\Cidade_.class
+model\bo\MovimentacaoEstoque_.class
 view\CadastroVenda.class
 view\ModalConnfirm$3.class
 view\BuscaVenda.class
@@ -170,6 +181,7 @@ view\CadastroFuncionario.class
 view\TemplateCadastro$1.class
 view\BuscaCarteirinha$4$1.class
 view\CadastroBairro$5.class
+model\bo\Endereco_.class
 view\BuscaEndereco.class
 controller\ControllerBuscaBairro.class
 view\CadastroFuncionario$12.class
@@ -183,6 +195,7 @@ controller\ControllerCadastroCarteirinha.class
 view\BuscaCarteirinha$2.class
 view\MenuPrincipal$3.class
 view\CadastroEndereco$8.class
+model\bo\Funcionario_.class
 view\TelaComproFiscal$4$1.class
 view\BuscaBairro$6.class
 controller\ControllerBuscaCompra.class
@@ -219,6 +232,7 @@ view\BuscaBairro$3.class
 utilities\Utilities.class
 model\bo\Produto.class
 view\CadastroCompra$2.class
+model\bo\Cliente_.class
 view\FinalizarVenda$3$1.class
 controller\ControllerBuscaFuncionario.class
 view\CadastroBairro$3.class
@@ -236,6 +250,7 @@ view\BuscaProduto$2.class
 view\CadastroCarteirinha$5.class
 view\CadastroFuncionario$5.class
 view\TelaCompra$6.class
+model\bo\Venda_.class
 controller\ControllerBuscaCliente.class
 view\BuscaCompra$2.class
 view\Resposta$2.class
@@ -258,6 +273,7 @@ view\ModalConnfirm$1.class
 view\BuscaEndereco$4$1.class
 view\TelaCompra$1.class
 view\BuscaEndereco$3.class
+model\bo\ItemCompra_.class
 model\bo\Fornecedor.class
 view\CadastroCarteirinha.class
 view\BuscaCarteirinha$3.class
@@ -275,7 +291,9 @@ controller\ClienteModalController.class
 view\CadastroCompra$1.class
 service\FuncionarioService.class
 model\bo\MovimentoCaixa.class
+model\bo\Caixa_.class
 service\CarteirinhaService.class
+model\bo\Carteirinha_.class
 controllerMovimento\EndVendaController.class
 view\TelaCompra$4.class
 controller\ControllerBuscaProduto.class

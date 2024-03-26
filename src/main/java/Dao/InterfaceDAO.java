@@ -15,6 +15,4 @@ public interface InterfaceDAO<T> {
     public abstract void update (T objeto);
     public abstract void delete(T objeto); 
     
-    
-    
 }
