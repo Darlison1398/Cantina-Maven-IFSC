@@ -34,7 +34,7 @@ public class CarteirinhaDAO implements InterfaceDAO<Carteirinha> {
     }
     
     private EntityManager getEntityManager() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
         
         if (entityManager == null) {
             entityManager = factory.createEntityManager();

@@ -34,7 +34,6 @@ public abstract class Pessoa {
     @Column
     private String complementoEndereco;
     
-    @JoinColumn
     @ManyToOne
     private Endereco endereco;
     

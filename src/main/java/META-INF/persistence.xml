@@ -15,9 +15,12 @@
     <class>model.bo.MovimentoCaixa</class>
     <class>model.bo.Produto</class>
     <class>model.bo.Venda</class>
+    <class>model.bo.Endereco</class>
+    <class>model.bo.Compra</class>
+    <class>model.bo.Carteirinha</class>
     <validation-mode>NONE</validation-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="Dev1310#5"/>

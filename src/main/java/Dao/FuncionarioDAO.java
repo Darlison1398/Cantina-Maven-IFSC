@@ -36,7 +36,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
     }
     
     private EntityManager getEntityManager() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
         
         if (entityManager == null) {
             entityManager = factory.createEntityManager();

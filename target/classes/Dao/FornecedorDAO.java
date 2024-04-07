@@ -37,7 +37,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     }
     
     private EntityManager getEntityManager() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
         
         if (entityManager == null) {
             entityManager = factory.createEntityManager();

@@ -33,7 +33,7 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
     }
     
     private EntityManager getEntityManager() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
         
         if (entityManager == null) {
             entityManager = factory.createEntityManager();
@@ -67,7 +67,7 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
         
         List<Cidade> listaCidade;
   
-        listaCidade = entityManager.createQuery("SELECT c FROM cidade c", Cidade.class).getResultList();        
+        listaCidade = entityManager.createQuery("SELECT c FROM Cidade c", Cidade.class).getResultList();        
         
         return listaCidade;
         
@@ -88,9 +88,7 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
         
         return listaCidade;
         
-    }
-    
-    
+    } 
     
 
     @Override
@@ -98,9 +96,9 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
         
         try {
             
-            Cidade cidade = entityManager.find(Cidade.class, objeto);
+            Cidade cidade = entityManager.find(Cidade.class, objeto.getId());
             entityManager.getTransaction().begin();
-            entityManager.merge(cidade);
+            entityManager.merge(objeto);
             entityManager.getTransaction().commit();
             
         } catch (Exception ex) {
@@ -109,14 +107,15 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
         }
     }
 
+    
     @Override
     public void delete(Cidade objeto) {
         try {
             
-            Cidade cidade = entityManager.find(Cidade.class, objeto);
+            Cidade cidade = entityManager.find(Cidade.class, objeto.getId());
             entityManager.getTransaction().begin();
-            entityManager.remove(cidade);
-            //entityManager.getTransaction().commit();
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
             
         } catch (Exception ex) {
             ex.printStackTrace();

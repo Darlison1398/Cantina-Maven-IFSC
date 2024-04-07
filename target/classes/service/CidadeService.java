@@ -28,30 +28,13 @@ public class CidadeService {
         return cidadeDAO.retrieve(parString);
     }
     
-    
-    
-    
-    
-    
-    /*  implementei aqui. se não de certo, aapagar        
-    public static List<Cidade> carregar(String nomeParametro, String parString){
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        return cidadeDAO.retrieve(nomeParametro, parString);
-    }*/
-    
-    
-    
-    
-    
-    
     public static void atualizar(Cidade objeto){
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        cidadeDAO.update(objeto);
+       // CidadeDAO cidadeDAO = new CidadeDAO();
+        CidadeDAO.getInstance().update(objeto);
     }
     
     public static void remover(Cidade objeto){
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        cidadeDAO.delete(objeto);
+        CidadeDAO.getInstance().delete(objeto);
     }
     
 }

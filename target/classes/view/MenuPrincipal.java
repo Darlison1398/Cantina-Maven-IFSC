@@ -212,7 +212,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemBairro);
 
-        jMenuItemCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Company.png"))); // NOI18N
+        jMenuItemCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Home.png"))); // NOI18N
         jMenuItemCidade.setText("Cidade");
         jMenuItemCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

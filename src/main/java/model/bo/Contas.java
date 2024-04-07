@@ -1,6 +1,7 @@
 
 package model.bo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -13,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Contas {
+public class Contas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

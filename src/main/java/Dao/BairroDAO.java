@@ -41,7 +41,7 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     }
     
     private EntityManager getEntityManager() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_cantina");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
         
         if (entityManager == null) {
             entityManager = factory.createEntityManager();
@@ -79,11 +79,9 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
         
         List<Bairro> listaBairros;
   
-        listaBairros = entityManager.createQuery("SELECT b FROM bairro b", Bairro.class).getResultList();        
+        listaBairros = entityManager.createQuery("SELECT b FROM Bairro b", Bairro.class).getResultList();        
         
         return listaBairros;
-        
-        
         
     }
 
@@ -117,9 +115,9 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
         
         try {
             
-            Bairro bairro = entityManager.find(Bairro.class, objeto);
+            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());
             entityManager.getTransaction().begin();
-            entityManager.merge(bairro);
+            entityManager.merge(objeto);
             entityManager.getTransaction().commit();
             
         } catch (Exception ex) {
@@ -132,19 +130,17 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
 
     @Override
     public void delete(Bairro objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "DELETE FROM mydb.bairro WHERE bairro.id = ?";
-        PreparedStatement pstm = null;
-
         try {
-              pstm = conexao.prepareStatement(sqlExecutar);
-              pstm.setInt(1, objeto.getId());
-              pstm.execute();
-       } catch (SQLException ex) {
-              ex.printStackTrace();
-       } finally {
-              ConnectionFactory.closeConnection(conexao, pstm);
-       }
+            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());
+            entityManager.getTransaction().begin();
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+            
+        }
 
     }
    

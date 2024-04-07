@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import model.bo.Carteirinha;
 import model.bo.Funcionario;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-03-26T00:31:51", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-04-07T00:09:55", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Venda.class)
 public class Venda_ { 
 

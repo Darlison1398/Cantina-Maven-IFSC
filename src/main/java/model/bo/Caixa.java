@@ -1,6 +1,7 @@
 
 package model.bo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Caixa {
+public class Caixa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
