@@ -81,14 +81,13 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
 
     @Override
     public List<Cidade> retrieve(String parString) {
-        
-        List<Cidade> listaCidade;
-        listaCidade = entityManager.createQuery("SELECT c FROM cidade c WHERE c.descricao LIKE :parDescricao", Cidade.class)
-                .setParameter("parDescricao", "%" + parString +  "%" ).getResultList();
-        
-        return listaCidade;
-        
-    } 
+    List<Cidade> listaCidades;
+    listaCidades = entityManager.createQuery("SELECT c FROM Cidade c WHERE c.descricao LIKE :parDescricao", Cidade.class)
+            .setParameter("parDescricao", "%" + parString +  "%" ).getResultList();
+    return listaCidades;
+    }
+    
+    
     
 
     @Override

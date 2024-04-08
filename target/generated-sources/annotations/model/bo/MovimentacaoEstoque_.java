@@ -9,7 +9,7 @@ import model.bo.ItemCompra;
 import model.bo.ItemVenda;
 import model.bo.Produto;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-04-07T00:09:55", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-04-08T20:25:32", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(MovimentacaoEstoque.class)
 public class MovimentacaoEstoque_ { 
 

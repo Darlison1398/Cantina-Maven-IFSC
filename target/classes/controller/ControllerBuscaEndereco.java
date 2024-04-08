@@ -63,15 +63,15 @@ public class ControllerBuscaEndereco implements ActionListener{
           } else if (selectedIndex == 2) {
                   // Filtro por cidade
                   String cidade = this.buscaEndereco.getjTextFieldFiltrar().getText().trim();
-                  listaEnderecos = EnderecoService.carregar("cidade", cidade);
+                  listaEnderecos = EnderecoService.carregar(cidade);
          } else if (selectedIndex == 3) {
                   // Filtro por bairro
                   String bairro = this.buscaEndereco.getjTextFieldFiltrar().getText().trim();
-                  listaEnderecos = EnderecoService.carregar("bairro", bairro);
+                  listaEnderecos = EnderecoService.carregar(bairro);
          } else if (selectedIndex == 4) {
                    // Filtro por logradouro
                   String logradouro = this.buscaEndereco.getjTextFieldFiltrar().getText().trim();
-                  listaEnderecos = EnderecoService.carregar("logradouro", logradouro);
+                  listaEnderecos = EnderecoService.carregar(logradouro);
          }
  
      

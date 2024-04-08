@@ -96,15 +96,12 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     
     @Override
     public List<Bairro> retrieve(String parString) {
-        
-        List<Bairro> listaBairros;
-        listaBairros = entityManager.createQuery("SELECT b FROM bairro b WHERE b.descricao LIKE :parDescricao", Bairro.class)
-                .setParameter("parDescricao", "%" + parString +  "%" ).getResultList();
-        
-        return listaBairros;
-        
-        
-    }
+    List<Bairro> listaBairros;
+    listaBairros = entityManager.createQuery("SELECT b FROM Bairro b WHERE b.descricao LIKE :parDescricao", Bairro.class)
+            .setParameter("parDescricao", "%" + parString +  "%" ).getResultList();
+    return listaBairros;
+}
+
     
     
 
