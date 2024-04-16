@@ -121,16 +121,22 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
     try {
         entityManager.getTransaction().begin();
         
-        // Obtém o endereço gerenciado pelo contexto de persistência
         Endereco endereco = entityManager.find(Endereco.class, objeto.getId());
         
         // Mescla as alterações do objeto fornecido no objeto gerenciado
         endereco.setCep(objeto.getCep());
         endereco.setLogradouro(objeto.getLogradouro());
         endereco.setStatus(objeto.getStatus());
-        // Não é necessário mesclar bairro e cidade, pois já estão associados ao endereço
-
-        // Mescla o objeto Endereco atualizado no contexto de persistência
+        
+        Bairro bairro = new Bairro();
+        bairro.setId(objeto.getBairro().getId());
+        endereco.setBairro(bairro);
+        
+        Cidade cidade = new Cidade();
+        cidade.setId(objeto.getCidade().getId());
+        endereco.setCidade(cidade);
+        
+        
         entityManager.merge(endereco);
 
         entityManager.getTransaction().commit();
@@ -143,6 +149,7 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
 
     @Override
     public void delete(Endereco objeto) {
+        
         try {
             Endereco endereco = entityManager.find(Endereco.class, objeto.getId());
             entityManager.getTransaction().begin();

@@ -9,33 +9,27 @@ public class FuncionarioService {
     
         
     public static void adicionar(Funcionario objeto) {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.create(objeto);
+        FuncionarioDAO.getInstance().create(objeto);
     }
     
     public static List<Funcionario> carregar(){
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        return funcionarioDAO.retrieve();
+        return FuncionarioDAO.getInstance().retrieve();
     }
     
     public static Funcionario carregar(int parPK){
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        return funcionarioDAO.retrieve(parPK);
+        return FuncionarioDAO.getInstance().retrieve(parPK);
     }
     
     public static List<Funcionario> carregar(String parString){
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        return funcionarioDAO.retrieve(parString);
+        return  FuncionarioDAO.getInstance().retrieve(parString);
     }
     
     public static void atualizar(Funcionario objeto){
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.update(objeto);
+        FuncionarioDAO.getInstance().update(objeto);
     }
     
     public static void remover(Funcionario objeto){
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.delete(objeto);
+        FuncionarioDAO.getInstance().delete(objeto);
     }
     
 }
