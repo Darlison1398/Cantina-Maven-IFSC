@@ -23,7 +23,7 @@ public class Produto implements Serializable {
     private String descricao;
     
     @Column
-    private String codigoBarra;
+    private String codigoBarras;
     
     @Column
     private float valor;
@@ -34,10 +34,10 @@ public class Produto implements Serializable {
     public Produto() {
     }
 
-    public Produto(int id, String descricao, String codigoBarra, float valor, boolean status) {
+    public Produto(int id, String descricao, String codigoBarras, float valor, boolean status) {
         this.id = id;
         this.descricao = descricao;
-        this.codigoBarra = codigoBarra;
+        this.codigoBarras = codigoBarras;
         this.valor = valor;
         this.status = status;
     }
@@ -46,42 +46,25 @@ public class Produto implements Serializable {
         return id;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public String getCodigoBarra() {
-        return codigoBarra;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public void setCodigoBarra(String codigoBarra) {
-        this.codigoBarra = codigoBarra;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;    
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
-    
-    /*public void setStatus(boolean status){
-        if(status == true){
-            this.status = 'I';
-        } else{
-            this.status = 'A';
-        }
-    
-    }*/
 
     public float getValor() {
         return valor;
@@ -90,10 +73,15 @@ public class Produto implements Serializable {
     public void setValor(float valor) {
         this.valor = valor;
     }
-    
-    
-    
-    
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     
 
 
@@ -102,9 +90,10 @@ public class Produto implements Serializable {
     public String toString() {
         return this.getId() + ", " 
                 + this.getDescricao() + ", " 
-                + this.getCodigoBarra() + ", "
-                + this.getValor()
-                + ", " + this.getStatus();
+                + this.getCodigoBarras() + ", "
+                + this.isStatus() + ", "
+                + this.getValor();
+                
 
     }
 

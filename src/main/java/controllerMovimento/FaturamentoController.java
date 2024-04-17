@@ -94,8 +94,6 @@ public class FaturamentoController implements ActionListener {
             }
             
             
-            
-            
         } else if(e.getSource() == this.faturamento.getjBtnAdicionar()){
             
             if (this.faturamento.getjTCodBarrasProduto().getText().isEmpty()) {
@@ -155,7 +153,7 @@ public class FaturamentoController implements ActionListener {
                 // Cliente cliente = new Cliente();
                  carteirinha = service.CarteirinhaService.carregar(codigoCarteirinha);
                  
-                 this.faturamento.getjTCodCliente().setText(carteirinha.getCodigoBarra());
+                 this.faturamento.getjTCodCliente().setText(carteirinha.getCodigocarteirinha());
                  this.faturamento.getjTnomeCliente().setText(carteirinha.getCliente().getNome());
                  
                 
@@ -177,25 +175,17 @@ public class FaturamentoController implements ActionListener {
              this.faturamento.getjTCodBarrasProduto().requestFocus();
              
              
-             
-             
          } else if (e.getSource() == this.faturamento.getjBtnEndVenda()) {
              FinalizarVenda endVenda = new FinalizarVenda(null, true);
              EndVendaController controllerVenda = new  EndVendaController(endVenda);
              endVenda.setVisible(true);
              
-             
-             
-             
-                         
             utilities.Utilities.limpaComponentes(true, this.faturamento.getjPanDadosProduto());
             utilities.Utilities.ativa(false, this.faturamento.getjPanDadosProduto());
             utilities.Utilities.limpaComponentes(true, this.faturamento.getjPanelCodigoBarras());
             utilities.Utilities.limpaComponentes(true, this.faturamento.getjPanDadosCliente());
             utilities.Utilities.limpaComponentes(true, this.faturamento.getjPdadosFinalProduto());
             
-            
-             
          }
         
         

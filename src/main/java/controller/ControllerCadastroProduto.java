@@ -59,7 +59,7 @@ public class ControllerCadastroProduto implements ActionListener{
             
             Produto produto = new Produto();
             produto.setDescricao(this.cadastroProduto.getjTDescricao().getText());
-            produto.setCodigoBarra(this.cadastroProduto.getjTCodigoBarras().getText());            
+            produto.setCodigoBarras(this.cadastroProduto.getjTCodigoBarras().getText());            
             produto.setStatus(this.cadastroProduto.getjCheckBoxStatus().isSelected());
             //produto.setValor(Float.parseFloat(this.cadastroProduto.getjFValor().getText()));
            //String valorText = this.cadastroProduto.getjFValor().getText().trim();
@@ -110,7 +110,7 @@ public class ControllerCadastroProduto implements ActionListener{
                 
                 this.cadastroProduto.getjTId().setText(produto.getId() + "");
                 this.cadastroProduto.getjTDescricao().setText(produto.getDescricao());
-                this.cadastroProduto.getjTCodigoBarras().setText(produto.getCodigoBarra());
+                this.cadastroProduto.getjTCodigoBarras().setText(produto.getCodigoBarras());
                 this.cadastroProduto.getjFValor().setText(String.valueOf(produto.getValor()));
 
                 this.cadastroProduto.getjCheckBoxStatus().setSelected(true);

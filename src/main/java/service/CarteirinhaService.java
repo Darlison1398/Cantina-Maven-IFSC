@@ -8,38 +8,31 @@ import model.bo.Carteirinha;
 public class CarteirinhaService {
     
     public static void adicionar(Carteirinha objeto) {
-        CarteirinhaDAO carteirinhaDAO = new CarteirinhaDAO();
-        carteirinhaDAO.create(objeto);
+        CarteirinhaDAO.getInstance().create(objeto);
     }
     
     public static List<Carteirinha> carregar(){
-        CarteirinhaDAO carteirinhaDAO = new CarteirinhaDAO();
-        return carteirinhaDAO.retrieve();
+        return CarteirinhaDAO.getInstance().retrieve();
     }
     
     public static Carteirinha carregar(int parPK){
-        CarteirinhaDAO carteirinhaDAO = new CarteirinhaDAO();
-        return carteirinhaDAO.retrieve(parPK);
+        return CarteirinhaDAO.getInstance().retrieve(parPK);
     }
     
     public static List<Carteirinha> carregar(String parString){
-        CarteirinhaDAO carteirinhaDAO = new CarteirinhaDAO();
-        return carteirinhaDAO.retrieve(parString);
+        return CarteirinhaDAO.getInstance().retrieve(parString);
     }
     
     public static void atualizar(Carteirinha objeto){
-        CarteirinhaDAO carteirinhaDAO = new CarteirinhaDAO();
-        carteirinhaDAO.update(objeto);
+        CarteirinhaDAO.getInstance().update(objeto);
     }
     
     public static void remover(Carteirinha objeto){
-        CarteirinhaDAO carteirinhaDAO = new CarteirinhaDAO();
-        carteirinhaDAO.delete(objeto);
+        CarteirinhaDAO.getInstance().delete(objeto);
     }
     
-    public  static List<Carteirinha> retrieveByCodBarras(String codBarras){
-        CarteirinhaDAO carteirinhaDAO = new CarteirinhaDAO();
-        return carteirinhaDAO.retrieveByCodBarras(codBarras);
+    public static List<Carteirinha> retrieveByCodBarras(String codBarras){
+        return CarteirinhaDAO.getInstance().retrieveByCodBarras(codBarras);
         
     }
     

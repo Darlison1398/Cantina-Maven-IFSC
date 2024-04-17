@@ -138,6 +138,7 @@ public void update(Cliente objeto) {
         entityManager.getTransaction().rollback();
     }
     
+    
 }
 
     
@@ -155,6 +156,7 @@ public void update(Cliente objeto) {
             entityManager.getTransaction().rollback();
             
         }
+        
     }
     
 }

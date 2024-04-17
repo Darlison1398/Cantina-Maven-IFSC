@@ -69,7 +69,7 @@ public class ControllerBuscaCarteirinha implements ActionListener{
                                            carteirinhaAtual.getCliente().getCpf(),
                                            carteirinhaAtual.getDataGeracao(),
                                            carteirinhaAtual.getDataCancelamento(),
-                                           carteirinhaAtual.getCodigoBarra()
+                                           carteirinhaAtual.getCodigocarteirinha()
                 });
             }
         

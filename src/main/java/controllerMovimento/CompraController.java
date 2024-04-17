@@ -160,7 +160,7 @@ public class CompraController implements ActionListener{
                 // Cliente cliente = new Cliente();
                  carteirinha = service.CarteirinhaService.carregar(codigoCarteirinha);
                  
-                 this.telaCompra.getjFcodCarteirinha().setText(carteirinha.getCodigoBarra());
+                 this.telaCompra.getjFcodCarteirinha().setText(carteirinha.getCodigocarteirinha());
                  this.telaCompra.getjTnomeCliente().setText(carteirinha.getCliente().getNome());
                  
                 

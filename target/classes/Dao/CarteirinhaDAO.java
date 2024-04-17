@@ -56,251 +56,54 @@ public class CarteirinhaDAO implements InterfaceDAO<Carteirinha> {
     @Override
     public void create(Carteirinha objeto) {
         
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "INSERT INTO carteirinha (codigocarteirinha, datageracao, datacancelamento, cliente_id) "
-                             + "values(?, ?, ?, ?)";
-        PreparedStatement pstm = null;
-        
-        
         try {
-            
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getCodigoBarra());
-            pstm.setString(2, objeto.getDataGeracao());
-            pstm.setString(3, objeto.getDataCancelamento());
-            pstm.setInt(4, objeto.getCliente().getId());
-            pstm.execute();
-            
-            
-        } catch (SQLException ex){
+            entityManager.getTransaction().begin();
+
+            Cliente cliente = objeto.getCliente();
+            entityManager.persist(cliente);
+
+
+            entityManager.persist(objeto);
+
+            entityManager.getTransaction().commit();
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally{
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                    
-                } if (conexao != null) {
-                    conexao.close();
-                    
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();     
-            }    
-            
-        } 
+            entityManager.getTransaction().rollback();
+        }
         
     }
 
     @Override
     public List<Carteirinha> retrieve() {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar =  "SELECT carteirinha.id, "
-                + "carteirinha.codigocarteirinha, "
-                + "carteirinha.datageracao, "
-                + "carteirinha.datacancelamento, "
-                + "cliente.nome, "
-                + "cliente.cpf "
-                + "FROM mydb.carteirinha "
-                + "LEFT OUTER JOIN cliente ON cliente.id = carteirinha.cliente_id";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        
-        List<Carteirinha> listaCarteirinha = new ArrayList<>();
-        
-        try{
-             pstm = conexao.prepareStatement(sqlExecutar);
-             rst = pstm.executeQuery();
-             
-             
-             while(rst.next()) {
-                 Carteirinha carteirinha = new Carteirinha();
-                 carteirinha.setId(rst.getInt("id"));
-                 carteirinha.setCodigoBarra(rst.getString("codigocarteirinha"));
-                 carteirinha.setDataGeracao(rst.getString("datageracao"));
-                 carteirinha.setDataCancelamento(rst.getString("datacancelamento"));
-                 
-                 Cliente cliente = new Cliente();
-                 cliente.setId(rst.getInt("id"));
-                 cliente.setNome(rst.getString("nome"));
-                 cliente.setCpf(rst.getString("cpf"));
-                 
-                 carteirinha.setCliente(cliente);
-                 
-                 listaCarteirinha.add(carteirinha);
-                 
-             }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            
-        }  finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaCarteirinha;
-        }
+        List<Carteirinha> listaCarteirinha;
+        listaCarteirinha = entityManager.createQuery("SELECT c FROM Carteirinha c LEFT JOIN FETCH c.cliente", Carteirinha.class).getResultList();
+        return listaCarteirinha;
         
     }
 
     @Override
     public Carteirinha retrieve(int parPK) {  
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar =  "SELECT carteirinha.id, "
-                + "carteirinha.codigocarteirinha, "
-                + "carteirinha.datageracao, "
-                + "carteirinha.datacancelamento, "
-                + "cliente.nome, "
-                + "cliente.cpf "
-                + "FROM mydb.carteirinha "
-                + "LEFT OUTER JOIN cliente ON cliente.id = carteirinha.cliente_id "
-                + "WHERE carteirinha.id = ?";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
         
-        Carteirinha carteirinha = new Carteirinha();
-                
-        try{
-             pstm = conexao.prepareStatement(sqlExecutar);
-             pstm.setInt(1, parPK);
-             rst = pstm.executeQuery();
-             
-             
-             while(rst.next()) {   
-                 
-                 carteirinha.setId(rst.getInt("id"));
-                 carteirinha.setCodigoBarra(rst.getString("codigocarteirinha"));
-                 carteirinha.setDataGeracao(rst.getString("datageracao"));
-                 carteirinha.setDataCancelamento(rst.getString("datacancelamento"));
-                 
-                 Cliente cliente = new Cliente();
-                 cliente.setId(rst.getInt("id"));
-                 cliente.setNome(rst.getString("nome"));
-                 cliente.setCpf(rst.getString("cpf"));
-                 
-                 carteirinha.setCliente(cliente);
-                         
-             }
-            
-             
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            
-        }  finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return carteirinha;
-        }
-       
-       
-        
-        
-        
+        return entityManager.find(Carteirinha.class, parPK);
     }
 
     @Override
     public List<Carteirinha> retrieve(String parString) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar =  "SELECT carteirinha.id, "
-                + "carteirinha.codigocarteirinha, "
-                + "carteirinha.datageracao, "
-                + "carteirinha.datacancelamento, "
-                + "cliente.nome, "
-                + "cliente.cpf "
-                + "FROM mydb.carteirinha "
-                + "LEFT OUTER JOIN cliente ON cliente.id = carteirinha.cliente_id "
-                + "WHERE cliente.nome LIKE ?";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
+        List<Carteirinha> listaCarteirinha;
+        listaCarteirinha = entityManager.createQuery("SELECT c FROM Carteirinha c WHERE c.nome LIKE :parString", Carteirinha.class)
+                .setParameter("parString", "%" + parString +  "%" ).getResultList();
         
-        List<Carteirinha> listaCarteirinha = new ArrayList<>();
-                
-        try{
-            
-             pstm = conexao.prepareStatement(sqlExecutar);
-             pstm.setString(1, "%" + parString + "%");
-             rst = pstm.executeQuery();
-             
-             
-             while(rst.next()) {
-                 Carteirinha carteirinha = new Carteirinha();
-                 carteirinha.setId(rst.getInt("id"));
-                 carteirinha.setCodigoBarra(rst.getString("codigocarteirinha"));
-                 carteirinha.setDataGeracao(rst.getString("datageracao"));
-                 carteirinha.setDataCancelamento(rst.getString("datacancelamento"));
-                 
-                 Cliente cliente = new Cliente();
-                 cliente.setId(rst.getInt("id"));
-                 cliente.setNome(rst.getString("nome"));
-                 cliente.setCpf(rst.getString("cpf"));
-                 
-                 carteirinha.setCliente(cliente);
-                 
-                 listaCarteirinha.add(carteirinha);
-                 
-             }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            
-        }  finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaCarteirinha;
-        }
-            
-        
+        return listaCarteirinha;
     }
     
    // @Override
     public List<Carteirinha> retrieveByCodBarras(String codBarras) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar =  "SELECT carteirinha.id, "
-                + "carteirinha.codigocarteirinha, "
-                + "carteirinha.datageracao, "
-                + "carteirinha.datacancelamento, "
-                + "cliente.nome, "
-                + "cliente.cpf "
-                + "FROM mydb.carteirinha "
-                + "LEFT OUTER JOIN cliente ON cliente.id = carteirinha.cliente_id "
-                + "WHERE carteirinha.codigocarteirinha LIKE ?";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
+        List<Carteirinha> listaCarteirinha;
+        listaCarteirinha = entityManager.createQuery("SELECT c FROM Carteirinha c WHERE c.codigocarteirinha LIKE :parString", Carteirinha.class)
+                .setParameter("parString", "%" + codBarras +  "%" ).getResultList();
         
-        List<Carteirinha> listaCarteirinha = new ArrayList<>();
-                
-        try{
-            
-             pstm = conexao.prepareStatement(sqlExecutar);
-             pstm.setString(1, "%" + codBarras + "%");
-             rst = pstm.executeQuery();
-             
-             
-             while(rst.next()) {
-                 Carteirinha carteirinha = new Carteirinha();
-                 carteirinha.setId(rst.getInt("id"));
-                 carteirinha.setCodigoBarra(rst.getString("codigocarteirinha"));
-                 carteirinha.setDataGeracao(rst.getString("datageracao"));
-                 carteirinha.setDataCancelamento(rst.getString("datacancelamento"));
-                 
-                 Cliente cliente = new Cliente();
-                 cliente.setId(rst.getInt("id"));
-                 cliente.setNome(rst.getString("nome"));
-                 cliente.setCpf(rst.getString("cpf"));
-                 
-                 carteirinha.setCliente(cliente);
-                 
-                 listaCarteirinha.add(carteirinha);
-                 
-             }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            
-        }  finally{
-            
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaCarteirinha;
-        }
-            
+        return listaCarteirinha;
         
     }
 
@@ -309,48 +112,23 @@ public class CarteirinhaDAO implements InterfaceDAO<Carteirinha> {
     
     @Override
     public void update(Carteirinha objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar =  "UPDATE carteirinha SET "
-                   + "codigocarteirinha = ?, "
-                   + "datageracao = ?, "
-                   + "datacancelamento = ?, "
-                   + "cliente_id = ? "
-                   + "WHERE id = ?";
-        PreparedStatement pstm = null;
-        
         try {
+            entityManager.getTransaction().begin();
+            Carteirinha carteirinha = entityManager.find(Carteirinha.class, objeto.getId());
+            carteirinha.setCodigocarteirinha(objeto.getCodigocarteirinha());
+            carteirinha.setDataCancelamento(objeto.getDataCancelamento());
+            Cliente cliente = objeto.getCliente();
+            carteirinha.getCliente().getNome();
+            carteirinha.getCliente().getCpf();
             
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getCodigoBarra());
-            pstm.setString(2, objeto.getDataGeracao());
-            pstm.setString(3, objeto.getDataCancelamento());
-            pstm.setInt(4, objeto.getCliente().getId());
-            pstm.setInt(5, objeto.getId());
-            pstm.execute();
+            entityManager.merge(cliente);
+            entityManager.getTransaction().commit();
             
-            
-        } catch (SQLException ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally{
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                    
-                } if (conexao != null) {
-                    conexao.close();
-                    
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();     
-            }    
-            
-        } 
-        
-        
-        
-        
-        
-        
+            entityManager.getTransaction().rollback();
+        }
+    
     }
     
     
@@ -358,20 +136,19 @@ public class CarteirinhaDAO implements InterfaceDAO<Carteirinha> {
 
     @Override
     public void delete(Carteirinha objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "DELETE FROM mydb.carteirinha WHERE carteirinha.id = ?";
-        PreparedStatement pstm = null;
-
+        
         try {
-              pstm = conexao.prepareStatement(sqlExecutar);
-              pstm.setInt(1, objeto.getId());
-              pstm.execute();
-       } catch (SQLException ex) {
-              ex.printStackTrace();
-       } finally {
-              ConnectionFactory.closeConnection(conexao, pstm);
-       }
-
+            Carteirinha carteirinha = entityManager.find(Carteirinha.class, objeto.getId());
+            entityManager.getTransaction().begin();
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+            
+        }
+        
     }
 
 }
