@@ -32,8 +32,7 @@ public class ProdutoService {
         ProdutoDAO.getInstance().delete(objeto);
     }
     public static List<Produto> carregarPorCodigoBarras(String codBarras) {
-       ProdutoDAO produtoDAO = new ProdutoDAO();
-       return null;
+       return ProdutoDAO.getInstance().retrieveByCodBarras(codBarras);
     }
 
     

@@ -273,6 +273,21 @@ public class TelaCompra extends javax.swing.JDialog {
     public void setjFcodCarteirinha(JFormattedTextField jFcodCarteirinha) {
         this.jFcodCarteirinha = jFcodCarteirinha;
     }
+
+    public JTextField getjTnomeFuncionario() {
+        return jTnomeFuncionario;
+    }
+
+    public void setjTnomeFuncionario(JTextField jTnomeFuncionario) {
+        this.jTnomeFuncionario = jTnomeFuncionario;
+    }
+
+    
+    
+    
+    
+    
+    
     
     
 
@@ -307,6 +322,8 @@ public class TelaCompra extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jTnomeCliente = new javax.swing.JTextField();
         jFcodCarteirinha = new javax.swing.JFormattedTextField();
+        jTnomeFuncionario = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jPanelbbtnsFim = new javax.swing.JPanel();
         jBtnCANCELAR = new javax.swing.JButton();
         jbFinalizarCompra = new javax.swing.JButton();
@@ -542,16 +559,30 @@ public class TelaCompra extends javax.swing.JDialog {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("Funcionário");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPaneldadosCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBtnBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPaneldadosCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnBuscarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(360, 360, 360))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jTnomeFuncionario)
+                                .addGap(14, 14, 14))))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,7 +591,11 @@ public class TelaCompra extends javax.swing.JDialog {
                 .addComponent(jBtnBuscarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPaneldadosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTnomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
 
         jPanelbbtnsFim.setBackground(new java.awt.Color(204, 255, 102));
@@ -584,6 +619,11 @@ public class TelaCompra extends javax.swing.JDialog {
         jbFinalizarCompra.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jbFinalizarCompra.setForeground(new java.awt.Color(255, 255, 255));
         jbFinalizarCompra.setText("Finalizar Venda");
+        jbFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFinalizarCompraActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jLabel13.setText("F2: Buscar Cliente");
@@ -695,6 +735,10 @@ public class TelaCompra extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_ENTER
 
+    private void jbFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFinalizarCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbFinalizarCompraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -755,6 +799,7 @@ public class TelaCompra extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
@@ -765,6 +810,7 @@ public class TelaCompra extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableDadosProduto;
     private javax.swing.JTextField jTnomeCliente;
+    private javax.swing.JTextField jTnomeFuncionario;
     private javax.swing.JTextField jTobservacao;
     private javax.swing.JTextField jTvalorTotal;
     private javax.swing.JButton jbFinalizarCompra;

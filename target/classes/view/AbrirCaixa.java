@@ -322,6 +322,11 @@ public class AbrirCaixa extends javax.swing.JFrame {
         jBbuscarFuncionario.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jBbuscarFuncionario.setForeground(new java.awt.Color(255, 255, 255));
         jBbuscarFuncionario.setText("Buscar Funcionário");
+        jBbuscarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarFuncionarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPdadosFuncionarioLayout = new javax.swing.GroupLayout(jPdadosFuncionario);
         jPdadosFuncionario.setLayout(jPdadosFuncionarioLayout);
@@ -451,6 +456,7 @@ public class AbrirCaixa extends javax.swing.JFrame {
         jBarbirCaixa.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jBarbirCaixa.setForeground(new java.awt.Color(255, 255, 255));
         jBarbirCaixa.setText("Abrir caixa");
+        jBarbirCaixa.setActionCommand("0");
         jBarbirCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBarbirCaixaActionPerformed(evt);
@@ -461,11 +467,13 @@ public class AbrirCaixa extends javax.swing.JFrame {
         jBativarCaixa.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jBativarCaixa.setForeground(new java.awt.Color(255, 255, 255));
         jBativarCaixa.setText("Ativar");
+        jBativarCaixa.setActionCommand("1");
 
         jBfecharCaixa.setBackground(new java.awt.Color(0, 204, 204));
         jBfecharCaixa.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jBfecharCaixa.setForeground(new java.awt.Color(255, 255, 255));
         jBfecharCaixa.setText("Fechar Caixa");
+        jBfecharCaixa.setActionCommand("1");
 
         javax.swing.GroupLayout jPbotoesLayout = new javax.swing.GroupLayout(jPbotoes);
         jPbotoes.setLayout(jPbotoesLayout);
@@ -536,6 +544,10 @@ public class AbrirCaixa extends javax.swing.JFrame {
     private void jBarbirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBarbirCaixaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBarbirCaixaActionPerformed
+
+    private void jBbuscarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarFuncionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBbuscarFuncionarioActionPerformed
 
     /**
      * @param args the command line arguments

@@ -53,7 +53,6 @@ model\bo\MovimentacaoEstoque.class
 view\BuscaCidade.class
 view\CadastroCidade$2.class
 view\CadastroBairro$1.class
-view\TelaCompra$7$1.class
 view\CadastroFornecedor$3.class
 view\CadastroFornecedor$6.class
 view\CadastroCliente$7.class
@@ -65,6 +64,7 @@ view\BuscaFornecedor$1.class
 view\BuscaFuncionario$2.class
 view\TemplateBusca.class
 HibernateUtil.class
+service\CaixaService.class
 view\CadastroCarteirinha$4.class
 view\ModalConnfirm$3$1.class
 view\MenuPrincipal$11.class
@@ -93,6 +93,7 @@ controller\ControllerBuscaFornecedor.class
 view\CadastroEndereco$6.class
 model\bo\ItemCompra.class
 view\Faturamento.class
+Dao\AbrirCaixaDAO.class
 service\ProdutoService.class
 view\TemplateCadastro$3.class
 Dao\ClasseDados.class
@@ -146,6 +147,7 @@ view\BuscaCliente$1.class
 view\MenuPrincipal$6.class
 view\CadastroFuncionario$14.class
 view\Faturamento$5.class
+view\TelaCompra$8$1.class
 view\CadastroProduto$4.class
 view\BuscaVenda$3.class
 view\Resposta.class
@@ -196,6 +198,8 @@ view\BuscaCarteirinha$2.class
 view\MenuPrincipal$3.class
 view\CadastroEndereco$8.class
 model\bo\Funcionario_.class
+view\AbrirCaixa$3.class
+view\TelaCompra$8.class
 view\TelaComproFiscal$4$1.class
 view\BuscaBairro$6.class
 controller\ControllerBuscaCompra.class

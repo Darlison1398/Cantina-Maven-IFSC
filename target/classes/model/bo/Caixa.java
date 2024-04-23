@@ -35,7 +35,7 @@ public class Caixa implements Serializable {
     private String observacao;
     
     @Column
-    private char status;
+    private boolean status;
     
     @JoinColumn
     @ManyToOne
@@ -44,7 +44,7 @@ public class Caixa implements Serializable {
     public Caixa() {
     }
 
-    public Caixa(int id, LocalDateTime dataHoraAbertura, LocalDateTime dataHoraFechamento, float valorAbertura, float valorFechamento, String observacao, char status, Funcionario funcionario) {
+    public Caixa(int id, LocalDateTime dataHoraAbertura, LocalDateTime dataHoraFechamento, float valorAbertura, float valorFechamento, String observacao, boolean status, Funcionario funcionario) {
         this.id = id;
         this.dataHoraAbertura = dataHoraAbertura;
         this.dataHoraFechamento = dataHoraFechamento;
@@ -103,11 +103,11 @@ public class Caixa implements Serializable {
         this.observacao = observacao;
     }
 
-    public char getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -131,7 +131,7 @@ public class Caixa implements Serializable {
                 + this.getValorAbertura() + ", " 
                 + this.getValorFechamento() + ", " 
                 + this.getObservacao() + ", " 
-                + this.getStatus() + ", "
+                + this.isStatus() + ", "
                 + this.funcionario.getUsuario();
 
     }

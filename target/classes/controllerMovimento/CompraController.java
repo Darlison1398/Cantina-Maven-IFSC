@@ -7,15 +7,20 @@ import static controller.ControllerCadastroCarteirinha.codigoCarteirinha;
 import static controller.ControllerCadastroCliente.codigoCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import model.bo.Caixa;
 import model.bo.Carteirinha;
 import model.bo.Cliente;
 import model.bo.Compra;
+import model.bo.Funcionario;
 import model.bo.Produto;
+import service.CaixaService;
 import view.BuscaCarteirinha;
 import view.BuscaCliente;
 import view.TelaCompra;
@@ -25,6 +30,8 @@ import view.TelaComproFiscal;
 public class CompraController implements ActionListener{
 
     TelaCompra telaCompra;
+    
+    public static int codigoCaixa;
     
     public CompraController(TelaCompra telaCompra) {
         this.telaCompra = telaCompra;
@@ -36,8 +43,10 @@ public class CompraController implements ActionListener{
        this.telaCompra.getjComboBoxDesconto().addActionListener(this);
        this.telaCompra.getjFcodCarteirinha().addActionListener(this);
        this.telaCompra.getjFquantidade().addActionListener(this);
+       //this.telaCompra.getjBbuscarFuncionario().addActionListener(this);
        
-       
+       this.telaCompra.getjTnomeFuncionario().addActionListener(this);
+
        /* desativando campos de textos */
        this.telaCompra.getjTnomeCliente().setEditable(false);
        this.telaCompra.getjTvalorTotal().setEditable(false);
@@ -62,7 +71,15 @@ public class CompraController implements ActionListener{
          // Chame um método para atualizar o estado do botão Cancelar com base na seleção da tabela
         atualizarEstadoBotaoCancelar();
         });
-
+       
+        
+        // caixa e funcionario
+        List<Caixa> listaCaixa = new ArrayList<Caixa>();
+        listaCaixa = service.CaixaService.carregar();
+        
+        for (Caixa caixaAtual: listaCaixa) {
+            this.telaCompra.getjTnomeFuncionario().setText(caixaAtual.getFuncionario().getNome());
+        }
         
        
        
@@ -176,30 +193,30 @@ public class CompraController implements ActionListener{
         } else if (e.getSource() == this.telaCompra.getjFquantidade()){
                 String valorTotalStr = this.telaCompra.getjTvalorTotal().getText();
     
-    if (!valorTotalStr.isEmpty() && valorTotalStr.matches(".*\\d.*")) {
-        float valorTotal = Float.parseFloat(valorTotalStr);
-        
-        JTextField quantidadeField = this.telaCompra.getjFquantidade();
-        
-        if (!quantidadeField.getText().isEmpty() && quantidadeField.getText().matches("\\d+")) {
-            int quantidade = Integer.parseInt(quantidadeField.getText());
-            
-            float novoValorTotal = valorTotal * quantidade;
-            
-            this.telaCompra.getjTvalorTotal().setText(String.format("%.0f", novoValorTotal));
-        } else {
-            JOptionPane.showMessageDialog(null, "Digite uma quantidade válida.");
-        }
-    } else {
-        JOptionPane.showMessageDialog(null, "Digite um valor total válido antes de inserir a quantidade.");
-    }
-            
-            
-            
-            
-            
-            
-            
+                if (!valorTotalStr.isEmpty() && valorTotalStr.matches(".*\\d.*")) {
+                    float valorTotal = Float.parseFloat(valorTotalStr);
+
+                    JTextField quantidadeField = this.telaCompra.getjFquantidade();
+
+                    if (!quantidadeField.getText().isEmpty() && quantidadeField.getText().matches("\\d+")) {
+                        int quantidade = Integer.parseInt(quantidadeField.getText());
+
+                        float novoValorTotal = valorTotal * quantidade;
+
+                        this.telaCompra.getjTvalorTotal().setText(String.format("%.0f", novoValorTotal));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Digite uma quantidade válida.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Digite um valor total válido antes de inserir a quantidade.");
+                }
+
+
+
+
+
+
+
             
             
             
@@ -220,7 +237,40 @@ public class CompraController implements ActionListener{
               
               
             
+              
+              
         } else if (e.getSource() == this.telaCompra.getJbFinalizarCompra()) {
+            
+            Compra compra = new Compra();
+
+            compra.setDataHoraCompra(LocalDateTime.now());
+            compra.setFlagTipoDesconto(this.telaCompra.getjComboBoxDesconto().getSelectedItem().toString());
+            compra.setNumerofi(new Random().nextInt(10000) + 1);
+            compra.setObservacao(this.telaCompra.getjTobservacao().getText());
+
+            // Convertendo o valor total para um Float antes de atribuí-lo à compra
+            String valorTotalStr = this.telaCompra.getjTvalorTotal().getText();
+
+            // Substituir vírgula por ponto (caso haja vírgula)
+            valorTotalStr = valorTotalStr.replace(",", ".");
+
+            // Verificar se a string não está vazia e contém apenas números ou ponto para evitar NumberFormatException
+            if (!valorTotalStr.isEmpty() && valorTotalStr.matches("[-+]?[0-9]*\\.?[0-9]+")) {
+                float valorTotal = Float.parseFloat(valorTotalStr);
+                compra.setValorDesconto(valorTotal);
+            } else {
+                // Trate o caso em que o valor não pode ser convertido
+                JOptionPane.showMessageDialog(null, "O valor total não é válido.");
+            }
+            
+            //compra.setCarteirinha(service.CarteirinhaService.carregar(codigoCliente));
+            //compra.setFuncionario(service.FuncionarioService.carregar(codigoFucnionario));
+
+
+            service.CompraService.adicionar(compra);
+
+            
+            
             
             if (this.telaCompra.getjTableDadosProduto().getRowCount() > 0 && !this.telaCompra.getjTvalorTotal().getText().isEmpty()) {
                 TelaComproFiscal tlcFiscal = new TelaComproFiscal(null, true);
@@ -231,8 +281,12 @@ public class CompraController implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Adicione produtos para realizar a venda.");
             }
             
+            this.telaCompra.dispose();
+            
             
           
+            
+            
             
         } else if (e.getSource() == this.telaCompra.getjComboBoxDesconto()){
             float semDesc = 0.1f;
@@ -262,7 +316,22 @@ public class CompraController implements ActionListener{
             }
             
             this.telaCompra.getjTvalorTotal().setText(String.format("%.2f", novoValor));
-        }
+        
+        } else if (e.getSource() == this.telaCompra.getjTnomeFuncionario()) {
+            //List<Caixa> caixas = CaixaService.carregar();
+            
+            
+                    
+        } /*else if (e.getSource() == this.telaCompra.getjBbuscarFuncionario()) {
+            codigoCaixa = 0;
+            if (codigoCaixa != 0) {
+                Caixa caixa = new Caixa();
+                caixa = service.CaixaService.carregar(codigoCaixa);
+                
+                this.telaCompra.getjTnomeFuncionario().setText(caixa.getFuncionario().getNome());
+            }
+            
+        }*/
         
     }
     
@@ -291,6 +360,7 @@ public class CompraController implements ActionListener{
             this.telaCompra.getjTvalorTotal().setText(String.format("%.0f", valorTotal));
         }
     }
+    
 
 
     

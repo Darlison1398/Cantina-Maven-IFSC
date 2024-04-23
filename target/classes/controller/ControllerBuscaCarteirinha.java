@@ -54,7 +54,7 @@ public class ControllerBuscaCarteirinha implements ActionListener{
                }
           } else if (selectedIndex == 2) {
                String descricao = this.buscaCarteirinha.getjTextFieldFiltrar().getText().trim();
-               listaCarteirinha = service.CarteirinhaService.carregar(descricao);
+               listaCarteirinha = service.CarteirinhaService.retrieveByCodBarras(descricao);
           } else {
                JOptionPane.showMessageDialog(null, "Selecione uma opção válida.");
                return;

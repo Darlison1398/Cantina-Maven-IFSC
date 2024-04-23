@@ -21,7 +21,7 @@ public class Compra {
     private int id;
     
     @Column
-    private int numeroNF;
+    private int numerofi;
     
     @Column
     private LocalDateTime dataHoraCompra;
@@ -30,31 +30,32 @@ public class Compra {
     private float valorDesconto;
     
     @Column
-    private char flagTipoDesconto;
-    
-    @Column
-    private char status;
+    private String flagTipoDesconto;
     
     @Column
     private String observacao;
     
+    @JoinColumn
+    @ManyToOne
+    private Carteirinha carteirinha;
     
     @JoinColumn
     @ManyToOne
-    private Fornecedor fornecedor;
+    private Funcionario funcionario;
+    
 
     public Compra() {
     }
 
-    public Compra(int id, int numeroNF, LocalDateTime dataHoraCompra, float valorDesconto, char flagTipoDesconto, char status, String observacao, Fornecedor fornecedor) {
+    public Compra(int id, int numerofi, LocalDateTime dataHoraCompra, float valorDesconto, String flagTipoDesconto, String observacao, Carteirinha carteirinha, Funcionario funcionario) {
         this.id = id;
-        this.numeroNF = numeroNF;
+        this.numerofi = numerofi;
         this.dataHoraCompra = dataHoraCompra;
         this.valorDesconto = valorDesconto;
         this.flagTipoDesconto = flagTipoDesconto;
-        this.status = status;
         this.observacao = observacao;
-        this.fornecedor = fornecedor;
+        this.carteirinha = carteirinha;
+        this.funcionario = funcionario;
     }
 
     public int getId() {
@@ -65,12 +66,12 @@ public class Compra {
         this.id = id;
     }
 
-    public int getNumeroNF() {
-        return numeroNF;
+    public int getNumerofi() {
+        return numerofi;
     }
 
-    public void setNumeroNF(int numeroNF) {
-        this.numeroNF = numeroNF;
+    public void setNumerofi(int numerofi) {
+        this.numerofi = numerofi;
     }
 
     public LocalDateTime getDataHoraCompra() {
@@ -89,20 +90,12 @@ public class Compra {
         this.valorDesconto = valorDesconto;
     }
 
-    public char getFlagTipoDesconto() {
+    public String getFlagTipoDesconto() {
         return flagTipoDesconto;
     }
 
-    public void setFlagTipoDesconto(char flagTipoDesconto) {
+    public void setFlagTipoDesconto(String flagTipoDesconto) {
         this.flagTipoDesconto = flagTipoDesconto;
-    }
-
-    public char getStatus() {
-        return status;
-    }
-
-    public void setStatus(char status) {
-        this.status = status;
     }
 
     public String getObservacao() {
@@ -113,27 +106,33 @@ public class Compra {
         this.observacao = observacao;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
+    public Carteirinha getCarteirinha() {
+        return carteirinha;
     }
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setCarteirinha(Carteirinha carteirinha) {
+        this.carteirinha = carteirinha;
     }
 
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    
     
 
     @Override
     public String toString() {
         return this.getId() + ", " 
-                + this.getNumeroNF() + ", " 
+                + this.getNumerofi() + ", " 
                 + this.getDataHoraCompra() + ", " 
                 + this.getValorDesconto() + ", " 
                 + this.getFlagTipoDesconto() + ", " 
-                + this.getStatus() + ", " 
-                + this.getObservacao() + ", "
-                + this.fornecedor.getCnpj() + ", "
-                + this.fornecedor.getRazaoSocial();
+                + this.getObservacao();
 
     }
 

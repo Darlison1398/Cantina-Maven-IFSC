@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import model.bo.Funcionario;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-04-16T23:29:53", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-04-23T00:32:11", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Caixa.class)
 public class Caixa_ { 
 
@@ -17,6 +17,6 @@ public class Caixa_ {
     public static volatile SingularAttribute<Caixa, Integer> id;
     public static volatile SingularAttribute<Caixa, LocalDateTime> dataHoraFechamento;
     public static volatile SingularAttribute<Caixa, Funcionario> funcionario;
-    public static volatile SingularAttribute<Caixa, Character> status;
+    public static volatile SingularAttribute<Caixa, Boolean> status;
 
 }

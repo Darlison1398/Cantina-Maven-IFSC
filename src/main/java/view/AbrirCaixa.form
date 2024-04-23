@@ -273,6 +273,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Buscar Funcion&#xe1;rio"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBbuscarFuncionarioActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -481,6 +484,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Abrir caixa"/>
+                    <Property name="actionCommand" type="java.lang.String" value="0"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBarbirCaixaActionPerformed"/>
@@ -498,6 +502,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ativar"/>
+                    <Property name="actionCommand" type="java.lang.String" value="1"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jBfecharCaixa">
@@ -512,6 +517,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Fechar Caixa"/>
+                    <Property name="actionCommand" type="java.lang.String" value="1"/>
                   </Properties>
                 </Component>
               </SubComponents>

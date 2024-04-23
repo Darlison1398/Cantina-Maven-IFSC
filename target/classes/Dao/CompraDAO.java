@@ -5,82 +5,111 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import model.bo.Bairro;
+import model.bo.Caixa;
 import model.bo.Carteirinha;
 import model.bo.Cidade;
 import model.bo.Cliente;
 import model.bo.Compra;
 import model.bo.Endereco;
+import model.bo.Funcionario;
 
-public class CompraDAO {
+public class CompraDAO implements InterfaceDAO<Compra> {
     
-    public Carteirinha dadosCliente(int parPK){
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "SELECT carteirinha.codigocarteirinha, "
-                                  + "cliente.nome, "
-                                  + "endereco.cep, "
-                                  + "cidade.descricao AS cidade_descricao, "
-                                  + "cidade.uf AS cidade_uf, "
-                                  + "bairro.descricao AS bairro_descricao, "
-                                  + "cliente.complementoEndereco " 
-                                  + "FROM mydb.carteirinha "
-                                  + "LEFT OUTER JOIN cliente ON cliente.id = carteirinha.cliente_id "
-                                  + "LEFT OUTER JOIN endereco ON cliente.endereco_id = endereco.id " 
-                                  + "LEFT OUTER JOIN cidade ON endereco.cidade_id = cidade.id " 
-                                  + "LEFT OUTER JOIN bairro ON endereco.bairro_id = bairro.id " 
-                                  + "WHERE carteirinha.id = ?";
         
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        
-        //Compra compra = new Compra();
-        Carteirinha carteirinha = new Carteirinha();
-        
-        try{
-            
-             pstm = conexao.prepareStatement(sqlExecutar);
-             pstm.setInt(1, parPK);
-             rst = pstm.executeQuery();
-             
-             while(rst.next()){
-                 
-                 Cliente cliente = new Cliente();
-                 cliente.setNome(rst.getString("nome"));
-                 carteirinha.setCliente(cliente);
-                 
-                 Endereco endereco = new Endereco ();
-                 endereco.setCep(rst.getString("cep"));
-                 endereco.setLogradouro(rst.getString("logradouro"));
-                 cliente.setEndereco(endereco);
-                 
-                 Cidade cidade = new Cidade();
-                 cidade.setUf(rst.getString("uf"));
-                 cidade.setDescricao(rst.getString("cidade.descricao"));
-                 endereco.setCidade(cidade);
-                 
-                 Bairro bairro = new Bairro();
-                 bairro.setDescricao(rst.getString("bairro.descricao"));
-                 endereco.setBairro(bairro);
-                 
-                 //carteirinha.setId(rst.getInt("id"));
-                 
-                 
-             }
-             
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        
-        }  finally{ 
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return carteirinha;
+            /*********   inicio   **********/
+    private static CompraDAO instance;
+    protected EntityManager entityManager;
+    
+    public static CompraDAO getInstance(){
+        if (instance == null) {
+            instance = new CompraDAO();
         }
         
-        
-                
-                
-        
-        
+        return instance;
+    }
+
+    public CompraDAO() {
+        entityManager = getEntityManager();
     }
     
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
+    
+    
+    /*********   fim   **********/
+    
+    
+    
+    
+    
+    public Carteirinha dadosCliente(int parPK){
+        return entityManager.find(Carteirinha.class, parPK);
+            
+    }
+
+    @Override
+    public void create(Compra compra) {
+        try {
+            entityManager.getTransaction().begin();
+
+            /*Funcionario funcionario = compra.getFuncionario();
+            entityManager.persist(funcionario);
+            
+            Carteirinha carteirinha = compra.getCarteirinha();
+            entityManager.persist(carteirinha);*/
+
+
+            entityManager.persist(compra);
+
+            entityManager.getTransaction().commit();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+        
+    }
+
+    @Override
+    public List<Compra> retrieve() {
+        List<Compra> listaCompra;
+  
+        listaCompra = entityManager.createQuery("SELECT c FROM Compra c", Compra.class).getResultList();        
+        
+        return listaCompra;
+    }
+
+    @Override
+    public Compra retrieve(int parPK) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Compra> retrieve(String parString) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(Compra objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(Compra objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+   
 }

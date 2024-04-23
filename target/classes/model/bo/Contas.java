@@ -199,8 +199,7 @@ public class Contas implements Serializable {
                 + this.venda.getFuncionario().getUsuario() + ", "
                 + this.venda.getCarteirinha().getId() + ", "
                 + this.compra.getId() + ", "
-                + this.compra.getFornecedor() + ", "
-                + this.compra.getNumeroNF();
+                + this.compra.getNumerofi();
 
     }
 

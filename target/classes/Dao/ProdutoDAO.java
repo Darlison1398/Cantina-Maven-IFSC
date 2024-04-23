@@ -88,6 +88,17 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
         return listaProduto;
         
     }
+    
+    public List<Produto> retrieveByCodBarras(String codBarras) {
+        /*List<Produto> listaProduto;
+        listaProduto = entityManager.createQuery("SELECT p FROM Produto p WHERE p.codigobarras LIKE :parcodBarras", Produto.class)
+            .setParameter("parDescricao", "%" + codBarras +  "%" ).getResultList();
+        return listaProduto;*/
+            List<Produto> listaProduto;
+    listaProduto = entityManager.createQuery("SELECT p FROM Produto p WHERE p.codigoBarras LIKE :parcodBarras", Produto.class)
+        .setParameter("parcodBarras", "%" + codBarras + "%").getResultList();
+    return listaProduto;
+    }
 
     
     

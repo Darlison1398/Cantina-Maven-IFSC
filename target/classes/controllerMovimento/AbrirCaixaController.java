@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import view.AbrirCaixa;
 import view.BuscaFuncionario;
 import static controller.ControllerCadastroFuncionario.codigoFuncionario;
+import java.time.LocalDateTime;
+import model.bo.Caixa;
 import model.bo.Funcionario;
 
 
@@ -29,8 +31,9 @@ public class AbrirCaixaController implements ActionListener {
         
         
         //utilities.Utilities.ativa(true, this.abrirCaixa.getjPbotoes());
-        utilities.Utilities.limpaComponentes(true, this.abrirCaixa.getjPdadosFuncionario());
-        utilities.Utilities.limpaComponentes(true, this.abrirCaixa.getjPdadosCaixa());
+        utilities.Utilities.ativa(true, this.abrirCaixa.getjPbotoes());
+        utilities.Utilities.limpaComponentes(false, this.abrirCaixa.getjPdadosFuncionario());
+        utilities.Utilities.limpaComponentes(false, this.abrirCaixa.getjPdadosCaixa());
         
         
     }
@@ -55,10 +58,49 @@ public class AbrirCaixaController implements ActionListener {
              }
              
          } else if (e.getSource() == this.abrirCaixa.getjBarbirCaixa()) {
-             System.out.println("Abrindo caixa");
+            utilities.Utilities.ativa(false, this.abrirCaixa.getjPbotoes());
+            utilities.Utilities.limpaComponentes(true, this.abrirCaixa.getjPdadosCaixa());
+            utilities.Utilities.limpaComponentes(true, this.abrirCaixa.getjPdadosFuncionario());
+            
              
          } else if (e.getSource() == this.abrirCaixa.getjBativarCaixa()){
-             System.out.println("Ativando caixa");
+             
+             Caixa caixa = new Caixa();
+             
+             caixa.setDataHoraAbertura(LocalDateTime.now());
+             caixa.setDataHoraFechamento(null);
+             caixa.setFuncionario(service.FuncionarioService.carregar(codigoFuncionario));
+             caixa.setObservacao(this.abrirCaixa.getjTobservacao().getText());
+             
+             /*Number valor = (Number) this.abrirCaixa.getjFvalorAbertura().getValue();
+             if (valor != null) {
+               caixa.setValorAbertura(valor.floatValue());
+             }*/
+
+             boolean statusCaixaAberto = this.abrirCaixa.getjRstatusCaixa().isSelected();
+             float valorAbertura = Float.parseFloat(this.abrirCaixa.getjFvalorAbertura().getText());
+             float valorFechamento = Float.parseFloat(this.abrirCaixa.getjFvalorFechamento().getText());
+             caixa.setStatus(statusCaixaAberto);
+             caixa.setValorAbertura(valorAbertura);
+             caixa.setValorFechamento(valorFechamento);
+             
+             service.CaixaService.adicionar(caixa);
+             
+             
+             
+             
+            utilities.Utilities.ativa(true, this.abrirCaixa.getjPbotoes());
+            utilities.Utilities.limpaComponentes(false, this.abrirCaixa.getjPdadosCaixa());
+            utilities.Utilities.limpaComponentes(false, this.abrirCaixa.getjPdadosFuncionario());
+           /* this.abrirCaixa.getjBbuscarFuncionario().setEnabled(false);
+            this.abrirCaixa.getjBarbirCaixa().setEnabled(false);
+            this.abrirCaixa.getjBfecharCaixa().setEnabled(true);
+            this.abrirCaixa.getjTidFuncionario().setEditable(false);
+            this.abrirCaixa.getjTobservacao().setEditable(false);
+            this.abrirCaixa.getjTusuarioFuncionario().setEditable(false);
+            this.abrirCaixa.getjFvalorAbertura().setEditable(false);*/
+           
+           this.abrirCaixa.dispose();
              
          } else if (e.getSource() == this.abrirCaixa.getjBfecharCaixa()) {
              System.out.println("Fechando caixa");
