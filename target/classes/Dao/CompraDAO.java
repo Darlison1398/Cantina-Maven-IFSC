@@ -65,10 +65,10 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             entityManager.getTransaction().begin();
 
             /*Funcionario funcionario = compra.getFuncionario();
-            entityManager.persist(funcionario);
+            entityManager.persist(funcionario);*/
             
             Carteirinha carteirinha = compra.getCarteirinha();
-            entityManager.persist(carteirinha);*/
+            entityManager.persist(carteirinha);
 
 
             entityManager.persist(compra);

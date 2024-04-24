@@ -81,6 +81,12 @@ public class CompraController implements ActionListener{
             this.telaCompra.getjTnomeFuncionario().setText(caixaAtual.getFuncionario().getNome());
         }
         
+        
+        List<Carteirinha> listaCarteirinha;
+        listaCarteirinha = service.CarteirinhaService.carregar();
+        for (Carteirinha carteirinha : listaCarteirinha){
+            
+        }
        
        
     }
@@ -247,6 +253,7 @@ public class CompraController implements ActionListener{
             compra.setFlagTipoDesconto(this.telaCompra.getjComboBoxDesconto().getSelectedItem().toString());
             compra.setNumerofi(new Random().nextInt(10000) + 1);
             compra.setObservacao(this.telaCompra.getjTobservacao().getText());
+            compra.setCarteirinha(service.CarteirinhaService.carregar(codigoCarteirinha));
 
             // Convertendo o valor total para um Float antes de atribuí-lo à compra
             String valorTotalStr = this.telaCompra.getjTvalorTotal().getText();

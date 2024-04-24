@@ -28,6 +28,7 @@ view\CadastroBairro$6.class
 view\CadastroCarteirinha$7.class
 view\TemplateBusca$3$1.class
 view\CadastroFuncionario$11.class
+view\TelaComproFiscal$5.class
 view\MenuPrincipal$9.class
 view\MenuPrincipal$14.class
 view\CadastroCliente$5.class
@@ -85,6 +86,7 @@ view\CadastroProduto$2.class
 model\bo\ItemVenda.class
 view\CadastroCliente.class
 view\TemplateCadastro$4.class
+view\TelaComproFiscal$5$1.class
 view\BuscaCidade$2.class
 model\bo\Pessoa.class
 view\MenuPrincipal$12.class
@@ -200,7 +202,6 @@ view\CadastroEndereco$8.class
 model\bo\Funcionario_.class
 view\AbrirCaixa$3.class
 view\TelaCompra$8.class
-view\TelaComproFiscal$4$1.class
 view\BuscaBairro$6.class
 controller\ControllerBuscaCompra.class
 service\ClienteService.class
