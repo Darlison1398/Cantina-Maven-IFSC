@@ -1,39 +1,30 @@
 
 package Dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import model.bo.Bairro;
-import model.bo.Caixa;
-import model.bo.Carteirinha;
-import model.bo.Cidade;
-import model.bo.Cliente;
 import model.bo.Compra;
-import model.bo.Endereco;
-import model.bo.Funcionario;
+import model.bo.ItemVenda;
+import model.bo.Produto;
 
-public class CompraDAO implements InterfaceDAO<Compra> {
+public class ItemVendaDAO implements InterfaceDAO<ItemVenda> {
     
         
-            /*********   inicio   **********/
-    private static CompraDAO instance;
+              /*********   inicio   **********/
+    private static ItemVendaDAO instance;
     protected EntityManager entityManager;
     
-    public static CompraDAO getInstance(){
+    public static ItemVendaDAO getInstance(){
         if (instance == null) {
-            instance = new CompraDAO();
+            instance = new ItemVendaDAO();
         }
         
         return instance;
     }
 
-    public CompraDAO() {
+    public ItemVendaDAO() {
         entityManager = getEntityManager();
     }
     
@@ -49,29 +40,21 @@ public class CompraDAO implements InterfaceDAO<Compra> {
     
     
     /*********   fim   **********/
-    
-    
-    
-    
-    
-    public Carteirinha dadosCliente(int parPK){
-        return entityManager.find(Carteirinha.class, parPK);
-            
-    }
 
     @Override
-    public void create(Compra compra) {
+    public void create(ItemVenda objeto) {
         try {
             entityManager.getTransaction().begin();
 
-            /*Funcionario funcionario = compra.getFuncionario();
-            entityManager.persist(funcionario);*/
-            
-            Carteirinha carteirinha = compra.getCarteirinha();
-            entityManager.persist(carteirinha);
+            Produto produto = objeto.getProduto();
+            entityManager.persist(produto);
 
 
+            Compra compra = objeto.getComrpa();
             entityManager.persist(compra);
+
+
+            entityManager.persist(objeto);
 
             entityManager.getTransaction().commit();
 
@@ -79,37 +62,31 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
         }
-        
     }
 
     @Override
-    public List<Compra> retrieve() {
-        List<Compra> listaCompra;
-  
-        listaCompra = entityManager.createQuery("SELECT c FROM Compra c", Compra.class).getResultList();        
-        
-        return listaCompra;
-    }
-
-    @Override
-    public Compra retrieve(int parPK) {
-        return entityManager.find(Compra.class, parPK);
-    }
-
-    @Override
-    public List<Compra> retrieve(String parString) {
+    public List<ItemVenda> retrieve() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Compra objeto) {
+    public ItemVenda retrieve(int parPK) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Compra objeto) {
+    public List<ItemVenda> retrieve(String parString) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-   
+    @Override
+    public void update(ItemVenda objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(ItemVenda objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }

@@ -19,6 +19,8 @@ import model.bo.Carteirinha;
 import model.bo.Cliente;
 import model.bo.Compra;
 import model.bo.Funcionario;
+import model.bo.ItemVenda;
+import model.bo.MovimentacaoEstoque;
 import model.bo.Produto;
 import service.CaixaService;
 import view.BuscaCarteirinha;
@@ -31,7 +33,7 @@ public class CompraController implements ActionListener{
 
     TelaCompra telaCompra;
     
-    public static int codigoCaixa;
+    public static int codigoCaixa, codCompra;
     
     public CompraController(TelaCompra telaCompra) {
         this.telaCompra = telaCompra;
@@ -270,12 +272,23 @@ public class CompraController implements ActionListener{
                 JOptionPane.showMessageDialog(null, "O valor total não é válido.");
             }
             
-            //compra.setCarteirinha(service.CarteirinhaService.carregar(codigoCliente));
-            //compra.setFuncionario(service.FuncionarioService.carregar(codigoFucnionario));
-
-
             service.CompraService.adicionar(compra);
 
+            
+            /*int idCompra = compra.getId();
+            
+            // fazer a parte do Movimentação estoque
+            MovimentacaoEstoque mvEstoque = new MovimentacaoEstoque();
+            String qtd = "1";
+            String tipoMov = "Saída";
+            //String statusM = "A";
+            
+            mvEstoque.setCompra(service.CompraService.carregar(idCompra));
+            mvEstoque.setDataHoraMovimentacao(LocalDateTime.now());
+            mvEstoque.setFlagTipoMovimentacao(tipoMov);
+            mvEstoque.setQtdMovimentada(qtd);
+            
+            service.MovimentacaoEstoqueService.adicionar(mvEstoque);*/
             
             
             

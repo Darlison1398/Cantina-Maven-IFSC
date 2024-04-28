@@ -21,52 +21,36 @@ public class MovimentacaoEstoque implements Serializable {
     private int id;
     
     @Column
-    private LocalDateTime dataHoraMovimento;
+    private LocalDateTime dataHoraMovimentacao;
     
     @Column
-    private char flagTipoMovimento;
+    private String flagTipoMovimentacao;
     
     @Column
-    private float qtdMovimentada;
+    private String qtdMovimentada;
     
     @Column
-    private String observacaoMovimento;
+    private String observacaoMovimentada;
     
     @Column
     private char status;
+
+    public MovimentacaoEstoque(int id, LocalDateTime dataHoraMovimentacao, String flagTipoMovimentacao, String qtdMovimentada, String observacaoMovimentada, char status) {
+        this.id = id;
+        this.dataHoraMovimentacao = dataHoraMovimentacao;
+        this.flagTipoMovimentacao = flagTipoMovimentacao;
+        this.qtdMovimentada = qtdMovimentada;
+        this.observacaoMovimentada = observacaoMovimentada;
+        this.status = status;
+    }
     
-    @JoinColumn
-    @ManyToOne
-    private ItemVenda itemVenda;
+
     
-    @JoinColumn
-    @ManyToOne
-    private ItemCompra itemCompra;
     
-    @JoinColumn
-    @ManyToOne
-    private Produto produto;
-    
-    @JoinColumn
-    @ManyToOne
-    private Funcionario funcionario;
-    
+
     
 
     public MovimentacaoEstoque() {
-    }
-
-    public MovimentacaoEstoque(int id, LocalDateTime dataHoraMovimento, char flagTipoMovimento, float qtdMovimentada, String observacaoMovimento, char status, ItemVenda itemVenda, ItemCompra itemCompra, Produto produto, Funcionario funcionario) {
-        this.id = id;
-        this.dataHoraMovimento = dataHoraMovimento;
-        this.flagTipoMovimento = flagTipoMovimento;
-        this.qtdMovimentada = qtdMovimentada;
-        this.observacaoMovimento = observacaoMovimento;
-        this.status = status;
-        this.itemVenda = itemVenda;
-        this.itemCompra = itemCompra;
-        this.produto = produto;
-        this.funcionario = funcionario;
     }
 
     public int getId() {
@@ -77,36 +61,36 @@ public class MovimentacaoEstoque implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getDataHoraMovimento() {
-        return dataHoraMovimento;
+    public LocalDateTime getDataHoraMovimentacao() {
+        return dataHoraMovimentacao;
     }
 
-    public void setDataHoraMovimento(LocalDateTime dataHoraMovimento) {
-        this.dataHoraMovimento = dataHoraMovimento;
+    public void setDataHoraMovimentacao(LocalDateTime dataHoraMovimentacao) {
+        this.dataHoraMovimentacao = dataHoraMovimentacao;
     }
 
-    public char getFlagTipoMovimento() {
-        return flagTipoMovimento;
+    public String getFlagTipoMovimentacao() {
+        return flagTipoMovimentacao;
     }
 
-    public void setFlagTipoMovimento(char flagTipoMovimento) {
-        this.flagTipoMovimento = flagTipoMovimento;
+    public void setFlagTipoMovimentacao(String flagTipoMovimentacao) {
+        this.flagTipoMovimentacao = flagTipoMovimentacao;
     }
 
-    public float getQtdMovimentada() {
+    public String getQtdMovimentada() {
         return qtdMovimentada;
     }
 
-    public void setQtdMovimentada(float qtdMovimentada) {
+    public void setQtdMovimentada(String qtdMovimentada) {
         this.qtdMovimentada = qtdMovimentada;
     }
 
-    public String getObservacaoMovimento() {
-        return observacaoMovimento;
+    public String getObservacaoMovimentada() {
+        return observacaoMovimentada;
     }
 
-    public void setObservacaoMovimento(String observacaoMovimento) {
-        this.observacaoMovimento = observacaoMovimento;
+    public void setObservacaoMovimentada(String observacaoMovimentada) {
+        this.observacaoMovimentada = observacaoMovimentada;
     }
 
     public char getStatus() {
@@ -117,55 +101,20 @@ public class MovimentacaoEstoque implements Serializable {
         this.status = status;
     }
 
-    public ItemVenda getItemVenda() {
-        return itemVenda;
-    }
+  
+    
 
-    public void setItemVenda(ItemVenda itemVenda) {
-        this.itemVenda = itemVenda;
-    }
-
-    public ItemCompra getItemCompra() {
-        return itemCompra;
-    }
-
-    public void setItemCompra(ItemCompra itemCompra) {
-        this.itemCompra = itemCompra;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
+    
+    
     
     @Override
     public String toString() {
         return this.getId() + ", " 
-                + this.getDataHoraMovimento() + ", " 
-                + this.getFlagTipoMovimento() + ", " 
+                + this.getDataHoraMovimentacao()+ ", " 
+                + this.getFlagTipoMovimentacao() + ", " 
                 + this.getQtdMovimentada() + ", " 
-                + this.getObservacaoMovimento() + ", " 
-                + this.getStatus() + ", "
-                + this.produto.getId() + ", "
-                + this.produto.getDescricao() + ", "
-                + this.itemCompra.getId() + ", "
-                + this.itemCompra.getQtdProduto() + ", "
-                + this.itemCompra.getValorUnitario() + ", "
-                + this.itemVenda.getId() + ", "
-                + this.itemVenda.getQtdProduto() + ", "
-                + this.itemVenda.getValorUnitario() +", "
-                + this.funcionario.getUsuario();
+                + this.getObservacaoMovimentada() + ", " 
+                + this.getStatus();
 
     }
 

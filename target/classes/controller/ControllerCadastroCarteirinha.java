@@ -122,6 +122,7 @@ public class ControllerCadastroCarteirinha implements ActionListener {
                 cadastroCarteirinha.getjTextFieldID().setEnabled(false);
                 cadastroCarteirinha.getjTextFieldNome().setEnabled(false);
                 cadastroCarteirinha.getjFormattedTextFieldCPF().setEnabled(false);
+                this.cadastroCarteirinha.getjFormattedTextFieldDataGeracao().setEditable(false);
                 
                 
                 

@@ -22,4 +22,9 @@ public class CompraService {
         return CompraDAO.getInstance().retrieve();
     }
     
+    public static Compra carregar(int parPK){
+        return CompraDAO.getInstance().retrieve(parPK);
+    }
+    
+    
 }

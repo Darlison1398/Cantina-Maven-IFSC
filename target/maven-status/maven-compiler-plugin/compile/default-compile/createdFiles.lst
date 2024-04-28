@@ -22,6 +22,7 @@ view\BuscaCarteirinha$1.class
 model\bo\Produto_.class
 view\AbrirCaixa$2.class
 view\CadastroFuncionario$3.class
+service\MovimentacaoEstoqueService.class
 view\CadastroFornecedor$8.class
 view\CadastroFornecedor$1.class
 view\CadastroBairro$6.class
@@ -66,6 +67,7 @@ view\BuscaFuncionario$2.class
 view\TemplateBusca.class
 HibernateUtil.class
 service\CaixaService.class
+service\ItemVendaService.class
 view\CadastroCarteirinha$4.class
 view\ModalConnfirm$3$1.class
 view\MenuPrincipal$11.class
@@ -112,6 +114,7 @@ model\bo\ItemVenda_.class
 controllerMovimento\FaturamentoController.class
 Dao\BairroDAO.class
 view\BuscaCliente$4.class
+Dao\ItemVendaDAO.class
 view\Faturamento$2.class
 view\TemplateBusca$3.class
 view\CadastroCliente$11.class
@@ -288,6 +291,7 @@ service\EnderecoService.class
 view\BuscaProduto$4.class
 Dao\ConnectionFactory.class
 view\CadastroBairro$7.class
+Dao\MovimentacaoEstoqueDAO.class
 view\CadastroCompra$6.class
 view\TelaCompra$2.class
 controller\ControllerCadastroFuncionario.class

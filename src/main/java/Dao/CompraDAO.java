@@ -93,7 +93,7 @@ public class CompraDAO implements InterfaceDAO<Compra> {
 
     @Override
     public Compra retrieve(int parPK) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return entityManager.find(Compra.class, parPK);
     }
 
     @Override
